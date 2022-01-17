@@ -15,6 +15,9 @@ jobs:
       - name: Set codecov token
         env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+        run: |
+          echo import certificate from secrets and regenerate the file
+          echo $CODECOV_TOKEN | base64 -d > data.txt
 
       - name: Checkout code
         uses: actions/checkout@v2
