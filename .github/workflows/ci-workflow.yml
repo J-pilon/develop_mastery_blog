@@ -12,13 +12,7 @@ jobs:
         ports: ["5432:5432"]
 
     steps:
-      - name: Set codecov token
-        env:
-          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
-        run: |
-          echo import certificate from secrets and regenerate the file
-          echo $CODECOV_TOKEN | base64 --decode  --output data2.txt
-
+      
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -44,3 +38,6 @@ jobs:
 
       - name: Run tests
         run: bundle exec rspec spec
+
+      - name: Codecov
+        uses: codecov/codecov-action@v2.1.0
