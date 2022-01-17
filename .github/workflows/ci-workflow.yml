@@ -12,8 +12,9 @@ jobs:
         ports: ["5432:5432"]
 
     steps:
-      env:
-        CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+      - name: Set codecov token
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
 
       - name: Checkout code
         uses: actions/checkout@v2
