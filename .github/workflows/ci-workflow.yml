@@ -17,7 +17,7 @@ jobs:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
         run: |
           echo import certificate from secrets and regenerate the file
-          echo $CODECOV_TOKEN | base64 -Dd  -o data2.txt
+          echo $CODECOV_TOKEN | base64 --decode  -o data2.txt
 
       - name: Checkout code
         uses: actions/checkout@v2
