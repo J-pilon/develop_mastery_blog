@@ -1,6 +1,7 @@
 # README
 
 ![ci workflow](https://github.com/J-pilon/develop_mastery_blog/actions/workflows/ci-workflow.yml/badge.svg)
+[![codecov](https://codecov.io/gh/J-pilon/develop_mastery_blog/branch/main/graph/badge.svg?token=qTiMNPjUw7)](https://codecov.io/gh/J-pilon/develop_mastery_blog)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
