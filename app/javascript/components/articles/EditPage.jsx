@@ -8,8 +8,15 @@ const EditPage = (props) => {
 			<form 
 				className="w-50 h-50 d-flex flex-column align-items-center p-3 border"
 				action={`/articles/${props.article.id}`} 
-				method="put"
+				method="post"
 			>
+
+				<Input 
+					type="hidden"
+					name="_method"
+					value="put"
+				/>
+
 				<Input 
 					type="hidden" 
 					name="authenticity_token" 
