@@ -37,7 +37,12 @@ jobs:
           bin/rails db:schema:load
 
       - name: Run tests
-        run: bundle exec rspec spec
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: postgres
+          PGPASSWORD: postgres
+        run: bin/rails spec
 
       - name: Codecov
         env:
