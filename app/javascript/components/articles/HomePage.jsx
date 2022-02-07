@@ -52,10 +52,18 @@ const HomePage = (props) => {
         <h1>Article Home</h1>
 
         <div>
-          {props?.articles?.map(createArticle)}
+          {props.articles.map(createArticle)}
         </div>
       </div>
   );
+}
+
+HomePage.propTypes = {
+  articles: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    body: PropTypes.string,
+    id: PropTypes.number
+  })).isRequired
 }
 
 export default HomePage
