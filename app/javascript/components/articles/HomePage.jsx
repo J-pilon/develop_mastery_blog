@@ -5,12 +5,13 @@ import PropTypes from "prop-types"
 const HomePage = (props) => {
 
   function createArticle(item, index) {
-    const link = `/articles/${item.id}/edit`;
+    const link = `/articles/${item.id}`;
 
     return (
         <Col
           key={`article-home-${index}`}
           className="mb-3 mr-3 p-2 d-flex flex-wrap flex-column justify-content-center align-items-center border"
+          onClick={() => document.location.href = link}
         >
           <h2>{item.title}</h2>
 
@@ -27,7 +28,7 @@ const HomePage = (props) => {
             />
 
             <Button
-              onClick={() => document.location.href=`${link}`}
+              onClick={() => document.location.href =`${link}/edit`}
             >
               Edit
             </Button>
