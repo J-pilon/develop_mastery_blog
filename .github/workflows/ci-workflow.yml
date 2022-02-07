@@ -33,8 +33,7 @@ jobs:
           PGUSER: postgres
           PGPASSWORD: postgres
         run: |
-          bin/rails db:create
-          bin/rails db:schema:load
+          bin/rails db:setup
 
       - name: Run tests
         env:
