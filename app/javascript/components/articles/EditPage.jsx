@@ -1,5 +1,7 @@
 import React from "react";
 import {Label, Input} from "reactstrap";
+import PropTypes from "prop-types"
+
 
 const EditPage = (props) => {
 

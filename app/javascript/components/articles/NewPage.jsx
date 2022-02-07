@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Label, Input} from "reactstrap";
+import PropTypes from "prop-types"
 
 
 const NewPage = (props) => {
