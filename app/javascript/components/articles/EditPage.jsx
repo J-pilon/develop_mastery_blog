@@ -53,4 +53,12 @@ const EditPage = (props) => {
 	);
 }
 
+EditPage.propTypes = {
+	article: PropTypes.shape({
+	  title: PropTypes.string,
+	  body: PropTypes.string,
+	  id: PropTypes.number
+	}).isRequired
+  }
+
 export default EditPage;
