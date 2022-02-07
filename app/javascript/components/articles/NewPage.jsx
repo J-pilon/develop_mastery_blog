@@ -4,17 +4,6 @@ import {Label, Input} from "reactstrap";
 
 const NewPage = (props) => {
 
-	// const [article, setArticle] = useState({title: "", body: ""})
-
-	// function dynamicOnchange(key) {
-	// 	return (e) => {
-	// 		setArticle({
-	// 			...article, 
-	// 			[key]: e?.target.value
-	// 		})
-	// 	}
-	// }
-
 	return(
 		<div className="d-flex flex-column justify-content-center align-items-center">
 			<form 
