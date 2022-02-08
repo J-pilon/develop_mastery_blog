@@ -1,5 +1,6 @@
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'rails'
+Rails.application.eager_load!
 
 if ENV['CI'] == 'true'
   require 'codecov'
