@@ -2,11 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Articles", type: :request do
 
-  if Article.where(id: 1).empty? && Article.all.length < 1
-    before(:all) do
-      FactoryBot.create(:article)
-      puts "Article created!"
-    end
+  before(:all) do
+    FactoryBot.create(:article)
   end
 
   describe "GET /404" do
