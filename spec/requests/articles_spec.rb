@@ -32,14 +32,6 @@ RSpec.describe "Articles", type: :request do
         expect(response).to have_http_status(200)
       end
     end  
-
-    context "if Article isn't found" do
-      it "responds with status code 404" do
-
-        get article_path(50)
-        expect(response).to have_http_status(404)
-      end
-    end
   end
 
   describe "GET /articles/new" do
