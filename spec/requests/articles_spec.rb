@@ -84,13 +84,8 @@ RSpec.describe "Articles", type: :request do
 
   describe "DELETE /articles/1" do
     it "reduces articles count by 1" do
-      status = Article.where(id: 1).empty?
-      expect(status).to eq(false)
 
-      delete "/articles/1"
-
-      status = Article.where(id: 1).empty?
-      expect(status).to eq(true)
+      expect{delete "/articles/1"}.to change { Article.count }.by(-1)
     end
   end
 end
