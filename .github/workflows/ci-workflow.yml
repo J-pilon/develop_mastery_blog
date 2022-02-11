@@ -35,7 +35,7 @@ jobs:
         run: |
           bin/rails db:setup
           
-      - run: webpacker:compile
+      - run: bin/rails webpacker:compile
         env: 
           RAILS_ENV: test
 
