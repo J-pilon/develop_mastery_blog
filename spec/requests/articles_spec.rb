@@ -41,10 +41,26 @@ RSpec.describe "Articles", type: :request do
   end
 
   describe "POST /articles" do
-    it "adds the new article" do
+    context "successfully redirects and" do
+      it "adds the new article" do
 
-      post "/articles", :params => {:article => {:title => "Article Title", :body => "This is the article body"}}
-      expect(response).to have_http_status(302)
+        post "/articles", :params => {:article => {:title => "Article Title", :body => "This is the article body"}}
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    context "fails to redirect because of unprocessable data" do
+      it "responds with a status of 422 when title is nil" do
+
+        post "/articles", :params => {:article => {:title => nil, :body => "This is the article body"}}
+        expect(response).to have_http_status(422)
+      end
+
+      it "responds with a status of 422 when body is nil" do
+
+        post "/articles", :params => {:article => {:title => "Title", :body => nil}}
+        expect(response).to have_http_status(422)
+      end
     end
   end
 
