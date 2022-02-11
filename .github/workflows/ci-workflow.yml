@@ -35,7 +35,9 @@ jobs:
         run: |
           bin/rails db:setup
           
-      - run: bundle exec rails test
+      - run: webpacker:compile
+        env: 
+          RAILS_ENV: test
 
       - name: Run tests
         env:
