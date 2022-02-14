@@ -1,6 +1,7 @@
 import React from "react"
 import {Container, Row, Col, Button, Input} from "reactstrap"
 import PropTypes from "prop-types"
+import TextContainer from "../TextContainer";
 
 const HomePage = (props) => {
 
@@ -8,43 +9,50 @@ const HomePage = (props) => {
     const link = `/articles/${item.id}`;
 
     return (
-        <Col
+        <div
+          lg={3}
           key={`article-home-${index}`}
-          className="mb-3 mr-3 p-2 d-flex flex-wrap flex-column justify-content-center align-items-center border"
-          onClick={() => document.location.href = link}
+          className="item-container-sizing item-container-padding flex-row-space-between"
+          
         >
-          <h2>{item.title}</h2>
+          <TextContainer
+            link={link}
+            title={item.title}
+            body={item.body}
+          />
 
-          <p>{item.body}</p>
 
-          <form 
-            action={`/articles/${item.id}`} 
-            method="post"
-          >
-            <Input 
-              type="hidden" 
-              name="authenticity_token" 
-              value={document.querySelector("[name=csrf-token").content} 
-            />
-
-            <Button
-              onClick={() => document.location.href =`${link}/edit`}
+          <div className="btn-nowrap btn-margin-left">
+            <form 
+              action={`/articles/${item.id}`} 
+              method="post"
             >
-              Edit
-            </Button>
+              <Input 
+                type="hidden" 
+                name="authenticity_token" 
+                value={document.querySelector("[name=csrf-token").content} 
+              />
 
-            <Button 
-              className="bg-danger"
-              type="submit" 
-              formMethod="post" 
-              name="_method" 
-              value="delete" 
-              data-confirm="Are you sure?"
-            >
-              Delete
-            </Button>
-          </form>
-        </Col>
+              <Button
+                className="btn-margin-right bg-primary"
+                onClick={() => document.location.href =`${link}/edit`}
+              >
+                Edit
+              </Button>
+
+              <Button 
+                className="bg-danger"
+                type="submit" 
+                formMethod="post" 
+                name="_method" 
+                value="delete" 
+                data-confirm="Are you sure?"
+              >
+                Delete
+              </Button>
+            </form>
+          </div>
+        </div>
     );
   }
 
