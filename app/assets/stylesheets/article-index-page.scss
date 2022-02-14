@@ -1,0 +1,50 @@
+.item-container-sizing {
+    min-height: 100px;
+    width: 100%;
+}
+
+.title-container-sizing {
+    width: 100%;
+}
+
+.btn-nowrap {
+    white-space: nowrap;
+}
+
+.item-container-padding {
+    padding: 2rem;
+}
+
+.flex-row-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-column-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-align-self-end {
+    text-align: right;
+}
+
+button.btn-margin-right {
+    margin-right: 1rem;
+}
+
+.btn-margin-left {
+    margin-left: 2rem;
+}
+
+.title-bottom-border {
+    border-bottom: 2px solid grey;
+}
+
+.clickable-link:hover {
+    cursor: pointer;
+    color: blue;
+}
