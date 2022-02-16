@@ -1,10 +1,20 @@
 class ArticlesController < ApplicationController
     def index
-        @articles = Article.all.order(created_at: :desc)
+        pageNumber = permittedParam[:page]&.to_i || 1
+        @articles = Article.all.order(created_at: :desc).limit(10)
+        @lastPage = (Article.count / 10) + 1
+
+        if (pageNumber < 1 || pageNumber > @lastPage)
+            @error = "Invalid page number!"
+            render :index 
+        else
+            pageNumber = (pageNumber - 1)
+            @articles.offset(10 * pageNumber)
+        end
     end
 
     def show
-        @article = Article.find(params[:id])
+        @article = Article.find(permittedParam[:id])
     end
 
     def new
@@ -22,11 +32,11 @@ class ArticlesController < ApplicationController
     end
 
     def edit
-        @article = Article.find(params[:id])
+        @article = Article.find(permittedParam[:id])
     end
 
     def update
-        @article = Article.find(params[:id])
+        @article = Article.find(permittedParam[:id])
 
         if @article.update(article_params)
             redirect_to @article 
@@ -36,7 +46,7 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
-        @article = Article.find(params[:id])
+        @article = Article.find(permittedParam[:id])
         @article.destroy
 
         redirect_to articles_path, status: :see_other
@@ -46,5 +56,9 @@ class ArticlesController < ApplicationController
 
     def article_params
         params.require(:article).permit(:title, :body)
+    end
+
+    def permittedParam
+        permittedParam = params.permit(:id, :page)
     end
 end

@@ -1,7 +1,9 @@
-import React from "react"
-import {Container, Row, Col, Button, Input} from "reactstrap"
-import PropTypes from "prop-types"
+import React from "react";
+import { Button, Input } from "reactstrap";
+import PropTypes from "prop-types";
 import TextContainer from "../TextContainer";
+import Paginator from "../Paginator";
+import ErrorBlock from "../ErrorBlock";
 
 const HomePage = (props) => {
 
@@ -60,8 +62,21 @@ const HomePage = (props) => {
       <div>
         <h1>Article Home</h1>
 
+        {props.error && (
+          <ErrorBlock
+            message={props.error}
+          />
+        )}
+
         <div>
           {props.articles.map(createArticle)}
+        </div>
+
+        <div>
+          <Paginator
+            link="/articles"
+            lastPage={props.lastPage}
+          />
         </div>
       </div>
   );
@@ -71,8 +86,10 @@ HomePage.propTypes = {
   articles: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     body: PropTypes.string,
-    id: PropTypes.number
-  })).isRequired
+    id: PropTypes.number,
+  })).isRequired,
+  lastPage: PropTypes.number.isRequired,
+  error: PropTypes.string,
 }
 
 export default HomePage
