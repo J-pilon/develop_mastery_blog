@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Paginator = (props) => {
 
     const { link, lastPage } = props;
 
+    let itemsPerPageParam = parseInt(new URLSearchParams(window.location.search).get("items_per_page")) || 10;
     const pageNumber = parseInt(new URLSearchParams(window.location.search).get("page"));
+
+    function submitHandler(e) {
+        e.preventDefault;
+
+        itemsPerPageParam = e.target.value;
+        window.location.href = `${link}?items_per_page=${itemsPerPageParam}`
+    }
 
   return (
     <div className="paginator-container">
@@ -25,6 +33,17 @@ const Paginator = (props) => {
                 prev page
             </a>
         </div>
+
+        <form onChange={submitHandler}>
+            <select name="paginator">
+                <option selected disabled>--Select items per page--</option>
+                <option value={0}>all</option>
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+            </select>
+        </form>
 
         <div className="paginator-btn-container">
             <a 

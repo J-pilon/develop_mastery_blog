@@ -1,15 +1,24 @@
 class ArticlesController < ApplicationController
     def index
         pageNumber = permittedParam[:page]&.to_i || 1
-        @articles = Article.all.order(created_at: :desc).limit(10)
-        @lastPage = (Article.count / 10) + 1
+        count = Article.count
+        itemsPerPage = permittedParam[:items_per_page]&.to_i || 10
+        
+        if itemsPerPage > 0
+            @lastPage = ((count / itemsPerPage) + 1)
+        else
+            @lastPage = 1
+            itemsPerPage = count
+        end
 
+        @articles = Article.all.order(created_at: :desc).limit(itemsPerPage)
+        
         if (pageNumber < 1 || pageNumber > @lastPage)
             @error = "Invalid page number!"
             render :index 
         else
             pageNumber = (pageNumber - 1)
-            @articles.offset(10 * pageNumber)
+            @articles.offset(itemsPerPage * pageNumber)
         end
     end
 
@@ -59,6 +68,6 @@ class ArticlesController < ApplicationController
     end
 
     def permittedParam
-        permittedParam = params.permit(:id, :page)
+        permittedParam = params.permit(:id, :page, :items_per_page)
     end
 end
