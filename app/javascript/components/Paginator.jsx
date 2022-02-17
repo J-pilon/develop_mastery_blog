@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const Paginator = (props) => {
 
     const { link, lastPage } = props;
 
-    let itemsPerPageParam = parseInt(new URLSearchParams(window.location.search).get("items_per_page")) || 10;
-    const pageNumber = parseInt(new URLSearchParams(window.location.search).get("page"));
+    const itemsLimitParam = parseInt(new URLSearchParams(window.location.search).get("items_limit")) || 0;
+    const pageNumber = parseInt(new URLSearchParams(window.location.search).get("page")) || 1;
 
+    
     function submitHandler(e) {
         e.preventDefault;
-
-        itemsPerPageParam = e.target.value;
-        window.location.href = `${link}?items_per_page=${itemsPerPageParam}`
+        window.location.href = `${link}?page=1&items_limit=${e.target.value}`;
     }
 
   return (
@@ -20,7 +19,8 @@ const Paginator = (props) => {
         <div className="paginator-btn-container">
             <a 
                 className="paginator-btn"
-                href={`${link}?page=1`}
+                style={{"pointerEvents": itemsLimitParam !== 0 ? "auto" : "none"}}
+                href={`${link}?page=1&items_limit=${itemsLimitParam}`}
             >
                 first page
             </a>
@@ -28,7 +28,7 @@ const Paginator = (props) => {
             <a 
                 className="paginator-btn paginator-btn-margin-left"
                 style={{"pointerEvents": pageNumber > 1 ? "auto" : "none"}}
-                href={`${link}?page=${pageNumber - 1}`}
+                href={`${link}?page=${pageNumber - 1}&items_limit=${itemsLimitParam}`}
             >
                 prev page
             </a>
@@ -36,7 +36,7 @@ const Paginator = (props) => {
 
         <form onChange={submitHandler}>
             <select name="paginator">
-                <option selected disabled>--Select items per page--</option>
+                <option selected disabled>--Select limit of items--</option>
                 <option value={0}>all</option>
                 <option value={5}>5</option>
                 <option value={10}>10</option>
@@ -49,14 +49,15 @@ const Paginator = (props) => {
             <a 
                 className="paginator-btn"
                 style={{"pointerEvents": pageNumber < lastPage ? "auto" : "none"}}
-                href={`${link}?page=${pageNumber + 1}`}
+                href={`${link}?page=${pageNumber + 1}&items_limit=${itemsLimitParam}`}
             >
                 next page
             </a>
             
             <a 
                 className="paginator-btn paginator-btn-margin-left"
-                href={`${link}?page=${lastPage}`}
+                style={{"pointerEvents": itemsLimitParam !== 0 ? "auto" : "none"}}
+                href={`${link}?page=${lastPage + 1}&items_limit=${itemsLimitParam}`}
             >
                 last page
             </a>
