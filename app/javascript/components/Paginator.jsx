@@ -7,7 +7,6 @@ const Paginator = (props) => {
 
     const itemsLimitParam = parseInt(new URLSearchParams(window.location.search).get("items_limit")) || 0;
     const pageNumber = parseInt(new URLSearchParams(window.location.search).get("page")) || 1;
-
     
     function submitHandler(e) {
         e.preventDefault;

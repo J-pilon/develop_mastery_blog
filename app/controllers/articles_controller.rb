@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
     def index
-
         if permittedParam[:page] == "0"
             @error = "Invalid page number!"
             @articles = Article.all.order(created_at: :desc)
