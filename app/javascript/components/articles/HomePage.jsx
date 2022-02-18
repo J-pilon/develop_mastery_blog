@@ -62,12 +62,6 @@ const HomePage = (props) => {
       <div>
         <h1>Article Home</h1>
 
-        {props.error && (
-          <ErrorBlock
-            message={props.error}
-          />
-        )}
-
         <div>
           {props.articles.map(createArticle)}
         </div>
@@ -89,7 +83,6 @@ HomePage.propTypes = {
     id: PropTypes.number,
   })).isRequired,
   lastPage: PropTypes.number.isRequired,
-  error: PropTypes.string,
 }
 
 export default HomePage

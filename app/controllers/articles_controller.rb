@@ -1,11 +1,10 @@
 class ArticlesController < ApplicationController
     def index
         if permittedParam[:page] == "0"
-            @error = "Invalid page number!"
             @articles = Article.all.order(created_at: :desc)
             @last_page = 1
 
-            return render :index
+            return articles_path(page: 1)
         end
         
         pag = Pagination.new(
