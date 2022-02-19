@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Articles", type: :request do
 
-  before(:all) do
-    FactoryBot.create(:article)
-  end
-
   describe "GET /404" do
     it "redirects with status 404" do
       
