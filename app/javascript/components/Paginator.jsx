@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import GetURLSearchParams from '../util/get-url-search-params';
 
 const Paginator = (props) => {
 
     const { link, lastPage } = props;
 
-    const itemsLimitParam = parseInt(new URLSearchParams(window.location.search).get("items_limit")) || 0;
-    const pageNumber = parseInt(new URLSearchParams(window.location.search).get("page")) || 1;
+    const { page, items_limit } = GetURLSearchParams(window.location);
+
+    const itemsLimitParam = items_limit || 10;
+    const pageNumber = page || 1;
     
     function submitHandler(e) {
         e.preventDefault;

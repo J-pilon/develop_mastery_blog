@@ -1,22 +1,24 @@
 class ArticlesController < ApplicationController
+
+    include Pagination
+
     def index
-        if permittedParam[:page] == "0"
-            @error = "Invalid page number!"
-            @articles = Article.all.order(created_at: :desc)
-            @last_page = 1
+        ordered_articles = Article.all.order(created_at: :desc) 
+        page_number = permittedParam[:page].to_i
+        items_limit = permittedParam[:items_limit] == nil ? 10 : permittedParam[:items_limit]
 
-            return render :index
+        if page_number == 0
+            @articles = ordered_articles.limit(10)
+            @last_page = 9
+
+            return articles_path(page: 1)
         end
-        
-        pag = Pagination.new(
-            data: Article.all.order(created_at: :desc), 
-            page: permittedParam[:page], 
-            items_limit: permittedParam[:items_limit]
-        ).return_pagination_params
 
-        @articles = pag[:data]
-        @page_number = pag[:page_number]
-        @last_page = pag[:last_page] 
+        paginated = return_pagination_params(items_limit: items_limit.to_i, data: ordered_articles, page_number: page_number)
+
+        @articles = paginated[:paginated_data]
+        @page_number = paginated[:page_number]
+        @last_page = paginated[:last_page]
     end
 
     def show
