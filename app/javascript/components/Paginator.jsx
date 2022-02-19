@@ -6,11 +6,10 @@ const Paginator = (props) => {
 
     const { link, lastPage } = props;
 
-    const params = GetURLSearchParams(window.location);
+    const { page, items_limit } = GetURLSearchParams(window.location);
 
-    const itemsLimitParam = params.items_limit || 0;
-    const pageNumber = params.page || 1;
-
+    const itemsLimitParam = items_limit || 10;
+    const pageNumber = page || 1;
     
     function submitHandler(e) {
         e.preventDefault;
