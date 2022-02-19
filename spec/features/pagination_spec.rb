@@ -3,7 +3,13 @@ require 'rails_helper'
 RSpec.feature "Paginations", type: :feature do
 
   before do
+    ActionController::Base.allow_forgery_protection = true
+
     visit articles_path
+  end
+
+  after(:all) do
+    ActionController::Base.allow_forgery_protection = false
   end
 
   scenario "user visits articles home page to see only 10 articles", js: true do
@@ -77,7 +83,7 @@ RSpec.feature "Paginations", type: :feature do
   scenario "user selects all for limit of items", js: true do
     select 'all', from: 'paginator'
 
-    expect(page).to have_css "div.item-container-sizing.item-container-padding.flex-row-space-between", count: 100
+    expect(page).to have_css "div.item-container-sizing.item-container-padding.flex-row-space-between", count: 108
   end
 
 end
