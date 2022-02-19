@@ -83,7 +83,7 @@ RSpec.feature "Paginations", type: :feature do
   scenario "user selects all for limit of items", js: true do
     select 'all', from: 'paginator'
 
-    expect(page).to have_css "div.item-container-sizing.item-container-padding.flex-row-space-between", count: 108
+    expect(page).to have_css "div.item-container-sizing.item-container-padding.flex-row-space-between", count: 100
   end
 
 end
