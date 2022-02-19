@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
 
         if page_number == 0
             @articles = ordered_articles.limit(10)
-            @last_page = 11
+            @last_page = 9
 
             return articles_path(page: 1)
         end
