@@ -10,7 +10,7 @@ module Pagination
     private
 
     def last_page(total_items_count:, items_limit:)
-        last_page = items_limit < 1 ? 1 : (total_items_count / items_limit)
+        last_page = items_limit < 1 ? 1 : total_items_count / items_limit
     end
 
     def return_data_subset(data:, items_limit:, page_number:)

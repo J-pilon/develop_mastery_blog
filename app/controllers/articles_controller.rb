@@ -5,15 +5,16 @@ class ArticlesController < ApplicationController
     def index
         ordered_articles = Article.all.order(created_at: :desc) 
         page_number = permittedParam[:page].to_i
+        items_limit = permittedParam[:items_limit] == nil ? 10 : permittedParam[:items_limit]
 
         if page_number == 0
-            @articles = ordered_articles
-            @last_page = 1
+            @articles = ordered_articles.limit(10)
+            @last_page = 11
 
             return articles_path(page: 1)
         end
 
-        paginated = return_pagination_params(items_limit: permittedParam[:items_limit].to_i, data: ordered_articles, page_number: page_number)
+        paginated = return_pagination_params(items_limit: items_limit.to_i, data: ordered_articles, page_number: page_number)
 
         @articles = paginated[:paginated_data]
         @page_number = paginated[:page_number]
