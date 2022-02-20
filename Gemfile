@@ -31,6 +31,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+gem "aws-sdk-s3", require: false
+
 group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -39,6 +41,8 @@ group :development, :test do
   gem 'factory_bot_rails'
 
   gem 'lorem_ipsum_amet'
+
+  gem 'dotenv-rails'
 end
 
 group :development do
