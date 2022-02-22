@@ -5,9 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-100.times do |i|
+100.times do
     Article.create(
-        title: "Article #{i + 1}",
-        body: LoremIpsum.w(50),
+        title: LiterateRandomizer.sentence(:words => 5),
+        body: LiterateRandomizer.paragraph,
     )
 end
