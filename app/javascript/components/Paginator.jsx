@@ -59,7 +59,7 @@ const Paginator = (props) => {
             <a 
                 className="paginator-btn paginator-btn-margin-left"
                 style={{"pointerEvents": itemsLimitParam !== 0 ? "auto" : "none"}}
-                href={`${link}?page=${lastPage + 1}&items_limit=${itemsLimitParam}`}
+                href={`${link}?page=${lastPage}&items_limit=${itemsLimitParam}`}
             >
                 last page
             </a>
