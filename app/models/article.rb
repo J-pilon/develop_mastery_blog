@@ -3,7 +3,11 @@ class Article < ApplicationRecord
     validates :body, presence: true
 
     def self.last_page(limit: 10)
-        self.count / limit
+        if limit !=0 
+            self.count / limit
+        else
+            1
+        end
     end
 
     def self.order_data(order: :desc)
@@ -11,6 +15,10 @@ class Article < ApplicationRecord
     end
 
     def self.offset_data(limit: 10, page: 1)
+        if limit == 0
+            limit = Article.count
+        end
+        
         order_data.limit(limit).offset(limit * (page - 1))
     end
 end

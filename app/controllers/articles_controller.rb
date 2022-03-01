@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
         if page_number == 0
             @articles = {
                 :records => Article.order_data.offset_data, 
-                :last_page => 9
+                :last_page => 10
             }
 
             return articles_path(page: 1)
