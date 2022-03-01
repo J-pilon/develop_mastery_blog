@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
 
-
     def index
         page_number = permittedParam[:page].to_i
         items_limit = permittedParam[:items_limit] == nil ? 10 : permittedParam[:items_limit].to_i
