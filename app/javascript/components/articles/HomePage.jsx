@@ -8,7 +8,7 @@ import ErrorBlock from "../ErrorBlock";
 const HomePage = (props) => {
 
   function createArticle(item, index) {
-    const link = `/articles/${item.id}`;
+    const link = `/articles/${item.slug}`;
 
     return (
         <div
