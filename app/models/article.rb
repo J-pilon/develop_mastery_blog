@@ -3,8 +3,9 @@ class Article < ApplicationRecord
     validates :body, presence: true
 
     def self.last_page(limit: 10)
-        if limit !=0 
-            self.count / limit
+
+        if limit != 0 
+            (self.count / limit.to_f).ceil
         else
             1
         end
