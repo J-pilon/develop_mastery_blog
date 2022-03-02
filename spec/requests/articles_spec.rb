@@ -18,11 +18,13 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
-  describe "GET /articles/1" do
+  describe "GET /articles/:id" do
     context "if Article is found" do
-      it "responds with article id 1" do
+      let(:article) {FactoryBot.create(:article)}
+
+      it "responds with article" do
     
-        get article_path(1)
+        get article_path(article)
         expect(response).to have_http_status(200)
       end
     end  
@@ -60,42 +62,50 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
-  describe "GET /articles/1/edit" do
+  describe "GET /articles/:id/edit" do
+    let(:article) {FactoryBot.create(:article)}
+
     it "responds with status 200" do
 
-      get "/articles/1/edit"
+      get "/articles/#{article.id}/edit"
       expect(response).to have_http_status(200)
     end
   end
 
-  describe "Put /articles/1" do
+  describe "Put /articles/:id" do
     context "successfully updates article" do
+      let(:article) {FactoryBot.create(:article)}
+
       it "redirects with status 302" do
 
-        put "/articles/1", :params => {:article => {title: "New Title", body: "New body"}}
+        put "/articles/#{article.id}", :params => {:article => {title: "New Title", body: "New body"}}
         expect(response).to have_http_status(302)
       end
     end
 
     context "fails to update article and responses with status 422" do
+      let(:article) {FactoryBot.create(:article)}
+
       it "when title is nil" do
 
-        put "/articles/1", :params => {:article => {title: nil, body: "New body"}}
+        put "/articles/#{article.id}", :params => {:article => {title: nil, body: article.body}}
         expect(response).to have_http_status(422)
       end
 
       it "when body is nil" do
 
-        put "/articles/1", :params => {:article => {title: "New Title", body: nil}}
+        put "/articles/#{article.id}", :params => {:article => {title: article.title, body: nil}}
         expect(response).to have_http_status(422)
       end
     end
   end
 
-  describe "DELETE /articles/1" do
+  describe "DELETE /articles/:id" do
+    let!(:article) {FactoryBot.create(:article)}
+
     it "reduces articles count by 1" do
 
-      expect{delete "/articles/1"}.to change { Article.count }.by(-1)
+      expect{delete "/articles/#{article.id}"}.to change { Article.count }.by(-1)
     end
   end
 end

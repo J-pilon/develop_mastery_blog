@@ -15,7 +15,6 @@ const HomePage = (props) => {
           lg={3}
           key={`article-home-${index}`}
           className="item-container-sizing item-container-padding flex-row-space-between"
-          
         >
           <TextContainer
             link={link}
