@@ -40,7 +40,7 @@ group :development, :test do
 
   gem 'factory_bot_rails'
 
-  gem 'lorem_ipsum_amet'
+  gem 'literate_randomizer'
 
   gem 'dotenv-rails'
 end

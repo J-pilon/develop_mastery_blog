@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     end
 
     def show
-        @article = Article.find(permittedParam[:id])
+        @article = Article.sluggable.find(permittedParam[:id])
     end
 
     def new
@@ -38,11 +38,11 @@ class ArticlesController < ApplicationController
     end
 
     def edit
-        @article = Article.find(permittedParam[:id])
+        @article = Article.sluggable.find(permittedParam[:id])
     end
 
     def update
-        @article = Article.find(permittedParam[:id])
+        @article = Article.sluggable.find(permittedParam[:id])
 
         if @article.update(article_params)
             redirect_to @article 
@@ -52,7 +52,7 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
-        @article = Article.find(permittedParam[:id])
+        @article = Article.sluggable.find(permittedParam[:id])
         @article.destroy
 
         redirect_to articles_path, status: :see_other
