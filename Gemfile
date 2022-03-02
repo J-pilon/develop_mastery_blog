@@ -62,6 +62,7 @@ group :test do
   gem 'capybara'
   gem 'webdrivers', '~> 5.0'
   gem 'launchy', '~> 2.5'
+  gem 'database_cleaner-active_record'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

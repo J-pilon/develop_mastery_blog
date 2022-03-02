@@ -1,24 +1,22 @@
 class ArticlesController < ApplicationController
 
-    include Pagination
-
     def index
-        ordered_articles = Article.all.order(created_at: :desc) 
         page_number = permittedParam[:page].to_i
-        items_limit = permittedParam[:items_limit] == nil ? 10 : permittedParam[:items_limit]
+        items_limit = permittedParam[:items_limit] == nil ? 10 : permittedParam[:items_limit].to_i
 
         if page_number == 0
-            @articles = ordered_articles.limit(10)
-            @last_page = 9
+            @articles = {
+                :records => Article.order_data.offset_data, 
+                :last_page => Article.last_page
+            }
 
             return articles_path(page: 1)
         end
 
-        paginated = return_pagination_params(items_limit: items_limit.to_i, data: ordered_articles, page_number: page_number)
-
-        @articles = paginated[:paginated_data]
-        @page_number = paginated[:page_number]
-        @last_page = paginated[:last_page]
+        @articles = {
+            :records => Article.order_data.offset_data(limit: items_limit, page: page_number),
+            :last_page => Article.last_page(limit: items_limit),
+        }
     end
 
     def show
