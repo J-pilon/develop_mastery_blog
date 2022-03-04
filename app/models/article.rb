@@ -2,7 +2,7 @@ class Article < ApplicationRecord
     validates :title, presence: true, uniqueness: true, length: { minimum: 5 }
     validates :body, presence: true, uniqueness: true, length: { minimum: 20 }
 
-    belongs_to :author
+    belongs_to :user
     
     after_validation :set_slug, only: [:create, :update]
 
