@@ -1,12 +1,17 @@
 import React from "react";
 import {Label, Input} from "reactstrap";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import ErrorBlock from "../ErrorBlock";
 
 
 const EditPage = (props) => {
 
 	return (
 		<div className="d-flex flex-column justify-content-center align-items-center">
+			<ErrorBlock
+				message={props.error}
+			/>
+
 			<form 
 				className="w-50 h-50 d-flex flex-column align-items-center p-3 border"
 				action={`/articles/${props.article.id}`} 
@@ -60,7 +65,8 @@ EditPage.propTypes = {
 	  title: PropTypes.string,
 	  body: PropTypes.string,
 	  id: PropTypes.number
-	}).isRequired
+	}).isRequired,
+	error: PropTypes.string,
   }
 
 export default EditPage;
