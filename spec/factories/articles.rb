@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :article do
-    title {"Article Title"}
-    body {"This is the test body of the article."}
+    title { LiterateRandomizer.sentence(:words => 5) }
+    body { LiterateRandomizer.paragraph(:sentences => 8) }
+
+    association :user
   end
 end
