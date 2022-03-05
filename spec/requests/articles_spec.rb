@@ -4,7 +4,6 @@ RSpec.describe "Articles", type: :request do
 
   describe "GET /404" do
     it "redirects with status 404" do
-      
       get "/asdf"
       expect(response).to have_http_status(404)
     end
@@ -12,7 +11,6 @@ RSpec.describe "Articles", type: :request do
 
   describe "GET /articles" do
     it "works!" do
-
       get articles_path
       expect(response).to have_http_status(200)
     end
@@ -23,7 +21,6 @@ RSpec.describe "Articles", type: :request do
       let(:article) {FactoryBot.create(:article)}
 
       it "responds with article" do
-    
         get article_path(article)
         expect(response).to have_http_status(200)
       end
@@ -32,7 +29,6 @@ RSpec.describe "Articles", type: :request do
 
   describe "GET /articles/new" do
     it "responds with the articles new form" do
-
       get new_article_path
       expect(response).to have_http_status(200)
     end
@@ -40,22 +36,21 @@ RSpec.describe "Articles", type: :request do
 
   describe "POST /articles" do
     context "successfully redirects and" do
-      it "adds the new article" do
+      let(:user) {FactoryBot.create(:user)}
 
-        post "/articles", :params => {:article => {:title => "Article Title", :body => "This is the article body"}}
+      it "adds the new article" do
+        expect{post "/articles", :params => {:article => {:user_id => user.id, :title => "Article Title", :body => "This is the article body"}}}.to change{Article.count}.by(1)
         expect(response).to have_http_status(302)
       end
     end
 
     context "fails to redirect because of unprocessable data" do
       it "responds with a status of 422 when title is nil" do
-
         post "/articles", :params => {:article => {:title => nil, :body => "This is the article body"}}
         expect(response).to have_http_status(422)
       end
 
       it "responds with a status of 422 when body is nil" do
-
         post "/articles", :params => {:article => {:title => "Title", :body => nil}}
         expect(response).to have_http_status(422)
       end
@@ -66,7 +61,6 @@ RSpec.describe "Articles", type: :request do
     let(:article) {FactoryBot.create(:article)}
 
     it "responds with status 200" do
-
       get "/articles/#{article.id}/edit"
       expect(response).to have_http_status(200)
     end
@@ -75,10 +69,9 @@ RSpec.describe "Articles", type: :request do
   describe "Put /articles/:id" do
     context "successfully updates article" do
       let(:article) {FactoryBot.create(:article)}
-
+      
       it "redirects with status 302" do
-
-        put "/articles/#{article.id}", :params => {:article => {title: "New Title", body: "New body"}}
+        put "/articles/#{article.id}", :params => {:article => {title: "New Title", body: "This is the new loooooooog body"}}
         expect(response).to have_http_status(302)
       end
     end
@@ -87,13 +80,11 @@ RSpec.describe "Articles", type: :request do
       let(:article) {FactoryBot.create(:article)}
 
       it "when title is nil" do
-
         put "/articles/#{article.id}", :params => {:article => {title: nil, body: article.body}}
         expect(response).to have_http_status(422)
       end
 
       it "when body is nil" do
-
         put "/articles/#{article.id}", :params => {:article => {title: article.title, body: nil}}
         expect(response).to have_http_status(422)
       end
@@ -104,8 +95,7 @@ RSpec.describe "Articles", type: :request do
     let!(:article) {FactoryBot.create(:article)}
 
     it "reduces articles count by 1" do
-
-      expect{delete "/articles/#{article.id}"}.to change { Article.count }.by(-1)
+      expect{delete "/articles/#{article.id}"}.to change{Article.count}.by(-1)
     end
   end
 end
