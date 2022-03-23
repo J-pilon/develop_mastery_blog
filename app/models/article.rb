@@ -4,6 +4,8 @@ class Article < ApplicationRecord
 
     belongs_to :user
     
+    before_save :sanitize_body, if: -> {self.body_changed?} 
+
     after_validation :set_slug, only: [:create, :update]
 
     def self.sluggable
@@ -39,5 +41,9 @@ class Article < ApplicationRecord
 
     def set_slug
         self.slug = title.to_s.parameterize
+    end
+
+    def sanitize_body
+        self.body = Sanitize.fragment(self.body, Sanitize::Config::RELAXED)
     end
 end
