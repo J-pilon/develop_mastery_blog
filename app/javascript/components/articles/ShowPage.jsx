@@ -6,7 +6,7 @@ const ShowPage = (props) => {
         <div>
             <h1>{props.article.title}</h1>
 
-            <p>{props.article.body}</p>
+            <p dangerouslySetInnerHTML={{__html: props.article.body}}></p>
         </div>
     );
 }

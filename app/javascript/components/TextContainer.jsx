@@ -9,11 +9,11 @@ const TextContainer = (props) => {
 
     const [view, setView] = useState(false);
 
-    const bodyArray = body.split("");
-    const amountOfCharsFirstSentence = bodyArray.indexOf("." || "?" || "!") + 1;
-    const firstSentence = bodyArray.splice(0,amountOfCharsFirstSentence).join("");
+    // const bodyArray = body.split("");
+    // const amountOfCharsFirstSentence = bodyArray.indexOf("." || "?" || "!") + 1;
+    // const firstSentence = bodyArray.splice(0,amountOfCharsFirstSentence).join("");
 
-    const bodyParagraph = view ? body : `${firstSentence}...`;
+    // const bodyParagraph = view ? body : `${firstSentence}...`;
 
     function showFullTextBody() {
         setView(!view);
@@ -29,7 +29,7 @@ const TextContainer = (props) => {
                     onClick={() => document.location.href = link}
                 >{title}</h2>
 
-                <div 
+                <div
                     className="flex-align-self-end"
                     onClick={showFullTextBody}
                 >
@@ -37,7 +37,7 @@ const TextContainer = (props) => {
                 </div>
             </div>
             
-            <p>{bodyParagraph}</p>
+            <p dangerouslySetInnerHTML={{__html: body}}></p>
         </div>
     );
 }
