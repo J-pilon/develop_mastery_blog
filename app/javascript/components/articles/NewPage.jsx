@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React from "react";
 import {Label, Input} from "reactstrap";
 import PropTypes from "prop-types"
 
@@ -27,9 +27,7 @@ const NewPage = (props) => {
 							placeholder="title"
 							name="article[title]"
 							id="article_title"
-						/>
-
-					
+						/>					
 				</Label>
 
 				<Label>
@@ -38,7 +36,7 @@ const NewPage = (props) => {
 					<Editor
 						apiKey="82i1zra2emdhclzhbkp2fdtnf0oafyx5yxr89bkls8cqaaur"
 						textareaName="article[body]"
-						initialValue="<p>This is the initial content of the editor.</p>"
+						initialValue="<p>What would you like to say?</p>"
 						init={{
 						height: 500,
 						menubar: false,
@@ -54,12 +52,6 @@ const NewPage = (props) => {
 						content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
 						}}
 					/>
-
-					{/* <Input
-						placeholder="body"
-						name="article[body]"
-						id="article_body"
-					/> */}
 				</Label>
 
 				<div>
