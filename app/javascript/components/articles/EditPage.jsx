@@ -1,7 +1,9 @@
 import React from "react";
 import {Label, Input} from "reactstrap";
 import PropTypes from "prop-types";
+
 import ErrorBlock from "../ErrorBlock";
+import { Editor } from '@tinymce/tinymce-react';
 
 
 const EditPage = (props) => {
@@ -39,14 +41,34 @@ const EditPage = (props) => {
 					/>
 				</Label>
 
-				<Label>
+				{/* <Label>
 					Body
 
 					<Input
 						name="article[body]"
 						defaultValue={props.article.body}
 					/>
-				</Label>
+				</Label> */}
+
+				<Editor
+					apiKey="82i1zra2emdhclzhbkp2fdtnf0oafyx5yxr89bkls8cqaaur"
+					textareaName="article[body]"
+					initialValue={props.article.body}
+					init={{
+					height: 500,
+					menubar: false,
+					plugins: [
+						'advlist autolink lists link image charmap print preview anchor',
+						'searchreplace visualblocks code fullscreen',
+						'insertdatetime media table paste code help wordcount'
+					],
+					toolbar: 'undo redo | formatselect | ' +
+					'bold italic backcolor | alignleft aligncenter ' +
+					'alignright alignjustify | bullist numlist outdent indent | ' +
+					'removeformat | help',
+					content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+					}}
+				/>
 
 				<div>
 					<Input 
