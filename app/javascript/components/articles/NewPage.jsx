@@ -1,9 +1,8 @@
 import React from "react";
 import {Label, Input} from "reactstrap";
-import PropTypes from "prop-types"
 
 import { Editor } from '@tinymce/tinymce-react';
-
+import { articleBodyEditorSpecs } from '../../util/tinymceEditorSpecs';
 
 const NewPage = (props) => {
 
@@ -34,23 +33,10 @@ const NewPage = (props) => {
 					Enter the articles body:
 
 					<Editor
-						apiKey="82i1zra2emdhclzhbkp2fdtnf0oafyx5yxr89bkls8cqaaur"
+						apiKey={process.env.TINY_MCE_API_KEY}
 						textareaName="article[body]"
 						initialValue="<p>What would you like to say?</p>"
-						init={{
-						height: 500,
-						menubar: false,
-						plugins: [
-							'advlist autolink lists link image charmap print preview anchor',
-							'searchreplace visualblocks code fullscreen',
-							'insertdatetime media table paste code help wordcount'
-						],
-						toolbar: 'undo redo | formatselect | ' +
-						'bold italic backcolor | alignleft aligncenter ' +
-						'alignright alignjustify | bullist numlist outdent indent | ' +
-						'removeformat | help',
-						content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-						}}
+						init={articleBodyEditorSpecs}
 					/>
 				</Label>
 
