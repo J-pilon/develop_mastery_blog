@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import {Label, Input} from "reactstrap";
-import PropTypes from "prop-types"
 
+import { Editor } from '@tinymce/tinymce-react';
+import { articleBodyEditorSpecs } from '../../util/tinymceEditorSpecs';
 
 const NewPage = (props) => {
 
@@ -15,23 +16,27 @@ const NewPage = (props) => {
 
 				<input type="hidden" name="authenticity_token" value={document.querySelector("[name=csrf-token]").content}/>
 
-				<Label>
-					Enter the articles title:
+				<input type="hidden" name="article[user_id]" value="1"/>
 
-					<Input
-						placeholder="title"
-						name="article[title]"
-						id="article_title"
-					/>
+
+				<Label>
+					Enter the articles title: 
+
+						<Input
+							placeholder="title"
+							name="article[title]"
+							id="article_title"
+						/>					
 				</Label>
 
 				<Label>
 					Enter the articles body:
 
-					<Input
-						placeholder="body"
-						name="article[body]"
-						id="article_body"
+					<Editor
+						apiKey={process.env.TINY_MCE_API_KEY}
+						textareaName="article[body]"
+						initialValue="<p>What would you like to say?</p>"
+						init={articleBodyEditorSpecs}
 					/>
 				</Label>
 

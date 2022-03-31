@@ -1,8 +1,10 @@
 import React from "react";
 import {Label, Input} from "reactstrap";
 import PropTypes from "prop-types";
-import ErrorBlock from "../ErrorBlock";
 
+import ErrorBlock from "../ErrorBlock";
+import { Editor } from '@tinymce/tinymce-react';
+import { articleBodyEditorSpecs } from '../../util/tinymceEditorSpecs';
 
 const EditPage = (props) => {
 
@@ -39,14 +41,12 @@ const EditPage = (props) => {
 					/>
 				</Label>
 
-				<Label>
-					Body
-
-					<Input
-						name="article[body]"
-						defaultValue={props.article.body}
-					/>
-				</Label>
+				<Editor
+					apiKey={process.env.TINY_MCE_API_KEY}
+					textareaName="article[body]"
+					initialValue={props.article.body}
+					init={articleBodyEditorSpecs}
+				/>
 
 				<div>
 					<Input 
